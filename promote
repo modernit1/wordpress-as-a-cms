@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+latest=`cat tag`
+
+name=`cat name`
+
+container=`docker images | grep $name | grep $latest | awk '{ print $3 }'`
+
+docker tag $container $name:latest
+
+docker push $name:latest

@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+tag=`date +%Y%m%d%H%M`
+name=`cat container_name`
+
+docker pull 'ubuntu:latest'
+
+docker build --tag "$name:$tag" .
+
+docker push "$name:$tag"
+
+echo $tag > tag
+echo $name > name
