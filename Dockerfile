@@ -81,7 +81,7 @@ RUN \
 
 COPY container-files/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 COPY container-files/php.ini /etc/php/7.0/apache2/php.ini
-COPTY ontainer-files/plugin-strap.sql /plugin-strap.sql
+COPY container-files/plugin-strap.sql /plugin-strap.sql 
 COPY container-files/setup.sh /setup.sh
 RUN /setup.sh
 
