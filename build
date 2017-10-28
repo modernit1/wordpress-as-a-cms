@@ -7,7 +7,7 @@ docker pull 'ubuntu:latest'
 
 docker build --tag "$name:$tag" .
 
-docker push "$name:$tag"
+#docker push "$name:$tag"
 
 echo $tag > tag
 echo $name > name

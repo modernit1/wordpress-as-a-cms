@@ -1,0 +1,2 @@
+
+mysqldump --complete-insert --skip-compact --extended-insert=FALSE wordpress

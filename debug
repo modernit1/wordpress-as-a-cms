@@ -1,0 +1,12 @@
+#!/bin/bash
+
+name=`cat name`
+tag=`cat tag`
+
+docker run \
+  -it \
+  -v backup:/backup \
+  -p 80:80 \
+  -p 3306:3306 \
+  --entrypoint=/bin/bash \
+  $name:$tag

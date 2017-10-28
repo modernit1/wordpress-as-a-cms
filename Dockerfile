@@ -75,18 +75,19 @@ RUN \
     mysql-server-5.7 \
     vim
 
-COPY wordpress /var/www/html
+COPY container-files/wordpress /var/www/html
 RUN \
   chown -Rv www-data:www-data /var/www/html
 
-COPY mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
-COPY php.ini /etc/php/7.0/apache2/php.ini
-COPY setup.sh /setup.sh
+COPY container-files/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+COPY container-files/php.ini /etc/php/7.0/apache2/php.ini
+COPTY ontainer-files/plugin-strap.sql /plugin-strap.sql
+COPY container-files/setup.sh /setup.sh
 RUN /setup.sh
 
 #COPY health-check.sh /health-check.sh
 
-COPY entrypoint.sh /entrypoint.sh
+COPY container-files/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
