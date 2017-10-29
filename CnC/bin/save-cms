@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "    syntax: ./save-cms <sitename>"
+  echo "    example: ./save-cms google"
+  exit 3
+fi
+runname="$1"
+
+container_id=`docker ps -a --format '{{.Names}} {{.ID}}' | awk -v runname="$runname" '$1 == runname { print $2 }'`
+if [ -z "$container_id" ]; then
+  echo "    no cms found with the name $runname"
+  exit 2
+fi
+
+set -e
+
+docker commit $container_id $runname
+docker stop $container_id
+docker rm $container_id
+
+echo "    Save completed successfully"

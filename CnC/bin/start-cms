@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "    syntax: ./start-cms <sitename>"
+  echo "    example: ./start-cms google"
+  exit 3
+fi
+runname="$1"
+
+container_id=`docker ps -a --format '{{.Names}} {{.ID}}' | awk -v runname="$runname" '$1 == runname { print $2 }'`
+if [ ! -z "$container_id" ]; then
+  echo "    $runname already running as $container_id"
+  exit 2
+fi
+
+docker run \
+  -d \
+  -p 80:80 \
+  --name $runname \
+  $runname:latest
+
+echo "    CMS Started"

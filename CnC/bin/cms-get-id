@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "    syntax: ./start-cms <sitename>"
+  echo "    example: ./start-cms google"
+  exit 3
+fi
+runname="$1"
+
+docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' | awk -v runname="$runname:latest" '$1 == runname { print $2 }'

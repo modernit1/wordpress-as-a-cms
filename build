@@ -1,13 +1,14 @@
 #!/bin/bash -e
 
 tag=`date +%Y%m%d%H%M`
-name=`cat container_name`
-
 docker pull 'ubuntu:latest'
 
-docker build --tag "$name:$tag" .
+docker build \
+  --tag "modernit1/cms-cnc:$tag" \
+  --tag "modernit1/cms-cnc:latest" \
+  CnC/.
 
-#docker push "$name:$tag"
-
-echo $tag > tag
-echo $name > name
+docker build \
+  --tag "modernit1/wordpress-cms:$tag" \
+  --tag "modernit1/wordpress-cms:latest" \
+  CMS/.
